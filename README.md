@@ -11,7 +11,7 @@ START THE SERVER
 START THE APP
 `npm run dev`
 
-[users](/src/assets/learn-react-query.png)
+![users](/src/assets/learn-react-query.png)
 
 
-[search](/src/assets/learn-react-query-search.png)
+![search](/src/assets/learn-react-query-search.png)
