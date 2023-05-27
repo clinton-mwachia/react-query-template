@@ -30,7 +30,7 @@ const Card = ({ name, href }) => {
 
 Card.propTypes = {
   name: PropTypes.string.isRequired,
-  href: PropTypes.number.isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 export default Card;

@@ -1,8 +1,8 @@
 import { Suspense, lazy } from "react";
+import Spiner from "./components/spinner/Spiner";
 import "./App.css";
 
 const Users = lazy(() => import("./components/users/Users"));
-const Spiner = lazy(() => import("./components/spinner/Spiner"));
 
 const App = () => {
   return (
