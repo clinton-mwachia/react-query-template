@@ -14,7 +14,7 @@ const Search = ({ searchText, setSearchText, suggestions }) => {
         }}
       />
       <List bg={"green.200"}>
-        {suggestions && searchText.length > 0
+        {searchText.length > 0
           ? suggestions.map((item, index) => (
               <ListItem key={index}>{item.name}</ListItem>
             ))

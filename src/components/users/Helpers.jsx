@@ -1,6 +1,6 @@
 import Axios from "../axios/Axios";
 
 export const getUsers = async () => {
-  const res = await Axios.get("/users");
-  return res.data;
+  const { data } = await Axios.get("/users");
+  return data;
 };

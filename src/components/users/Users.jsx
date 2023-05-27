@@ -20,9 +20,7 @@ const Users = () => {
     data: users,
     error,
     isPaused,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: getUsers,
+  } = useQuery(["users"], getUsers, {
     networkMode: "offlineFirst",
   });
 
@@ -43,11 +41,13 @@ const Users = () => {
     users.filter((item) =>
       item.name.toLowerCase().includes(searchText.toLowerCase())
     );
+
   const suggestionsData =
     users &&
     users.filter((item) =>
       item.name.toLowerCase().startsWith(searchText.toLowerCase())
     );
+
   return (
     <Box>
       <Stack
@@ -76,7 +76,7 @@ const Users = () => {
       </Stack>
 
       <Container maxW={"4xl"} mb={7} p={5}>
-        {filteredUsers.length > 0 ? (
+        {filteredUsers && filteredUsers.length > 0 ? (
           <SimpleGrid
             columns={{ base: 3, md: 3, sm: 1 }}
             spacing={"10px"}
@@ -86,7 +86,7 @@ const Users = () => {
           >
             {filteredUsers.map((user, index) => (
               <div key={index}>
-                <Card name={user.name} href={user.id} />
+                <Card name={user.name} href={`users/${user.id}`} />
               </div>
             ))}
           </SimpleGrid>
