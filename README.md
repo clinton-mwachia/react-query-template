@@ -13,7 +13,7 @@ START THE APP
 
 #Features
 1. View All Users
-<img src="/src/assets/learn-react-query.png">
+<img src="/src/assets/learn-react-query.png" width="400">
 
 2. Search Users + suggestions
-<img src="/src/assets/learn-react-query-search.png">
+<img src="/src/assets/learn-react-query-search.png" width="400">
