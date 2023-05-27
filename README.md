@@ -11,6 +11,9 @@ START THE SERVER
 START THE APP
 `npm run dev`
 
+#Features
+1. View All Users
 <img src="/src/assets/learn-react-query.png">
 
+2. Search Users + suggestions
 <img src="/src/assets/learn-react-query-search.png">
