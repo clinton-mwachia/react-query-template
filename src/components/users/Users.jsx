@@ -25,7 +25,7 @@ const Users = () => {
   });
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <span>Loading data...</span>;
   }
 
   if (isPaused) {
