@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { getUser } from "./Helpers";
 import { useQuery } from "@tanstack/react-query";
 import { SimpleGrid, Box, Container, Stack } from "@chakra-ui/react";
-import { ListItem1, ListItem2 } from "./ListItem";
+import { Address, Company, ListItem1, ListItem2 } from "./ListItem";
 import { Avatar } from "@chakra-ui/react";
 
 const User = () => {
@@ -49,8 +49,12 @@ const User = () => {
             <ListItem2 user={user} />
           </Stack>
         </Stack>
-        <Box bg="tomato" height="80px" w={"100%"}></Box>
-        <Box bg="tomato" height="80px" w={"100%"}></Box>
+        <Box w={"100%"}>
+          <Company user={user} />
+        </Box>
+        <Box w={"100%"}>
+          <Address user={user} />
+        </Box>
       </SimpleGrid>
       <Link to={"/"}>Home</Link>
     </Container>
