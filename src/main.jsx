@@ -20,7 +20,12 @@ const breakpoints = {
 };
 
 // 3. Extend the theme
-const theme = extendTheme({ breakpoints });
+const theme = extendTheme({
+  breakpoints,
+  components: {
+    Text: { baseStyle: { fontSize: "sm" } },
+  },
+});
 
 const router = createBrowserRouter([
   {
