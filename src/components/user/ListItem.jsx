@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Badge, Box, HStack, Text } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
 export const ListItem1 = ({ user }) => {
@@ -41,6 +41,60 @@ export const ListItem2 = ({ user }) => {
   );
 };
 
+export const Company = ({ user }) => {
+  const { name, catchPhrase, bs } = user.company;
+  return (
+    <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
+      <HStack spacing={"10px"}>
+        <Text as="b">Bs:</Text>
+        <Text color={"blue.500"}>{bs}</Text>
+      </HStack>
+      <HStack spacing={"10px"}>
+        <Text as="b">Name:</Text>
+        <Text noOfLines={1} color={"blue.500"}>
+          {name}
+        </Text>
+      </HStack>
+      <HStack spacing={"10px"}>
+        <Text as="b">CatchPhrase:</Text>
+        <Text color={"blue.500"}>{catchPhrase}</Text>
+      </HStack>
+    </Box>
+  );
+};
+
+export const Address = ({ user }) => {
+  const { city, street, suite, geo, zipcode } = user.address;
+  return (
+    <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
+      <HStack spacing={"10px"}>
+        <Text as="b">Suite:</Text>
+        <Text color={"blue.500"}>{suite}</Text>
+      </HStack>
+      <HStack spacing={"10px"}>
+        <Text as="b">Zipcode:</Text>
+        <Text noOfLines={1} color={"blue.500"}>
+          {zipcode}
+        </Text>
+      </HStack>
+      <HStack spacing={"10px"}>
+        <Text as="b">City:</Text>
+        <Text color={"blue.500"}>{city}</Text>
+      </HStack>
+      <HStack spacing={"10px"}>
+        <Text as="b">Street:</Text>
+        <Text color={"blue.500"}>{street}</Text>
+      </HStack>
+      <HStack spacing={"10px"}>
+        <Text as="b">Geo:</Text>
+        <Text color={"blue.500"}>
+          lat:{<Badge>{geo.lat}</Badge>} long:{<Badge>{geo.lng}</Badge>}
+        </Text>
+      </HStack>
+    </Box>
+  );
+};
+
 ListItem1.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
@@ -54,5 +108,27 @@ ListItem2.propTypes = {
     phone: PropTypes.string,
     website: PropTypes.string,
     email: PropTypes.string,
+  }),
+};
+
+Company.propTypes = {
+  user: PropTypes.shape({
+    company: PropTypes.shape({
+      name: PropTypes.string,
+      catchPhrase: PropTypes.string,
+      bs: PropTypes.string,
+    }),
+  }),
+};
+
+Address.propTypes = {
+  user: PropTypes.shape({
+    address: PropTypes.shape({
+      city: PropTypes.string,
+      street: PropTypes.string,
+      suite: PropTypes.string,
+      zipcode: PropTypes.string,
+      geo: PropTypes.arrayOf(PropTypes.string),
+    }),
   }),
 };
