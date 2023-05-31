@@ -1,7 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { getUser } from "./Helpers";
 import { useQuery } from "@tanstack/react-query";
-import { SimpleGrid, Box, Container, Stack, Text } from "@chakra-ui/react";
+import { SimpleGrid, Box, Container, Stack } from "@chakra-ui/react";
+import { ListItem1, ListItem2 } from "./ListItem";
 import { Avatar } from "@chakra-ui/react";
 
 const User = () => {
@@ -43,23 +44,9 @@ const User = () => {
           >
             <Avatar size={"xl"} bg="teal.500" />
           </Box>
-          <Stack direction={"row"}>
-            <Box
-              bg={"red.400"}
-              w={{ base: "60%" }}
-              p={2}
-              border={"1px"}
-              borderColor="gray.200"
-            >
-              <Text>{user.id}</Text>
-              <Text>{user.name}</Text>
-              <Text>{user.username}</Text>
-            </Box>
-            <Box bg={"green.400"} w={"100%"} p={2}>
-              <Text noOfLines={1}>{user.phone}</Text>
-              <Text>{user.website}</Text>
-              <Text>{user.email}</Text>
-            </Box>
+          <Stack direction={"column"}>
+            <ListItem1 user={user} />
+            <ListItem2 user={user} />
           </Stack>
         </Stack>
         <Box bg="tomato" height="80px" w={"100%"}></Box>
