@@ -43,7 +43,7 @@ export const ListItem2 = ({ user }) => {
 
 ListItem1.propTypes = {
   user: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     username: PropTypes.string,
   }),
