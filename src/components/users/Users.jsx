@@ -39,13 +39,13 @@ const Users = () => {
   const filteredUsers =
     users &&
     users.filter((item) =>
-      item.name.toLowerCase().includes(searchText.toLowerCase())
+      item.name?.toLowerCase().includes(searchText.toLowerCase())
     );
 
   const suggestionsData =
     users &&
     users.filter((item) =>
-      item.name.toLowerCase().startsWith(searchText.toLowerCase())
+      item.name?.toLowerCase().startsWith(searchText.toLowerCase())
     );
 
   return (

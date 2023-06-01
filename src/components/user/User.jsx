@@ -3,11 +3,14 @@ import { getUser } from "./Helpers";
 import { useQuery } from "@tanstack/react-query";
 import { SimpleGrid, Box, Container, Badge, Button } from "@chakra-ui/react";
 import { Address, Company, ListItem1, ListItem2 } from "./ListItem";
-import { ArrowBackIcon, EditIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, EditIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/react";
+import { useState } from "react";
+import EditUser from "./EditUser";
 
 const User = () => {
   const { id } = useParams();
+  const [edit, setEdit] = useState(false);
   const {
     isLoading,
     isError,
@@ -43,24 +46,32 @@ const User = () => {
       >
         <Avatar size={"xl"} bg="teal.500" />
       </Box>
-      <SimpleGrid columns={{ base: 2, md: 2, sm: 1 }} spacing={3}>
-        <ListItem1 user={user} />
-        <ListItem2 user={user} />
-        <Box w={"100%"}>
-          <Company user={user} />
-          <Badge p={2} mt={2}>
-            <Link to={"/"}>
-              <ArrowBackIcon boxSize={6} />
-            </Link>
-          </Badge>
-          <Button ml={2} mt={2} p={2}>
-            <EditIcon boxSize={6} />
-          </Button>
-        </Box>
-        <Box w={"100%"}>
-          <Address user={user} />
-        </Box>
-      </SimpleGrid>
+      {edit ? (
+        <EditUser user={user} />
+      ) : (
+        <SimpleGrid columns={{ base: 2, md: 2, sm: 1 }} spacing={3}>
+          <>
+            <ListItem1 user={user} />
+            <ListItem2 user={user} />
+            <Box w={"100%"}>
+              <Company user={user} />
+            </Box>
+            <Box w={"100%"}>
+              <Address user={user} />
+            </Box>
+          </>
+        </SimpleGrid>
+      )}
+      <Box>
+        <Badge p={2} mt={2}>
+          <Link to={"/"}>
+            <ArrowBackIcon boxSize={6} />
+          </Link>
+        </Badge>
+        <Button ml={2} mt={2} p={2} onClick={() => setEdit(!edit)}>
+          {edit ? <SmallCloseIcon boxSize={6} /> : <EditIcon boxSize={6} />}
+        </Button>
+      </Box>
     </Container>
   );
 };
