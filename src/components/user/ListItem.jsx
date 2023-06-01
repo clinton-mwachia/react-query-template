@@ -128,7 +128,7 @@ Address.propTypes = {
       street: PropTypes.string,
       suite: PropTypes.string,
       zipcode: PropTypes.string,
-      geo: PropTypes.arrayOf(PropTypes.string),
+      geo: PropTypes.object,
     }),
   }),
 };
