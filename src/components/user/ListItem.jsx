@@ -29,9 +29,10 @@ export const ListItem1 = ({ user }) => {
       <Badge
         position={"absolute"}
         backgroundColor={"red.200"}
+        transform="translateX(-50%)"
         zIndex={2}
         top={"-10px"}
-        right={"140px"}
+        left={"50%"}
         px={2}
       >
         Basic
