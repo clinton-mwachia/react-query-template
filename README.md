@@ -6,7 +6,7 @@ CLONE THE REPO
 `git clone https://github.com/clinton-mwachia/react-query-template.git`
 
 START THE SERVER
-`json-server --watch db.json`
+`json-server --watch db.json` (incase it does'nt work in terminal, use cmd)
 
 START THE APP
 `npm run dev`
@@ -17,3 +17,6 @@ START THE APP
 
 2. Search Users + suggestions
 <img src="/src/assets/learn-react-query-search.png" width="400">
+
+3. User Details
+<img src="/src/assets/user-detail.png" width="400">
