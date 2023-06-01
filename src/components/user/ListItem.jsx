@@ -4,19 +4,38 @@ import PropTypes from "prop-types";
 export const ListItem1 = ({ user }) => {
   const { id, name, username } = user;
   return (
-    <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
-      <HStack spacing={"10px"}>
-        <Text as="b">Name:</Text>
-        <Text color={"purple.500"}>{name}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">User ID:</Text>
-        <Text noOfLines={1}>{id}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Username:</Text>
-        <Text color={"tomato"}>{username}</Text>
-      </HStack>
+    <Box
+      w={"100%"}
+      p={2}
+      border={"1px"}
+      borderColor="gray.300"
+      position={"relative"}
+    >
+      <Box position={"relative"} zIndex={1}>
+        <HStack spacing={"10px"}>
+          <Text as="b">Name:</Text>
+          <Text color={"purple.500"}>{name}</Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">User ID:</Text>
+          <Text noOfLines={1}>{id}</Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">Username:</Text>
+          <Text color={"tomato"}>{username}</Text>
+        </HStack>
+      </Box>
+
+      <Badge
+        position={"absolute"}
+        backgroundColor={"red.200"}
+        zIndex={2}
+        top={"-10px"}
+        right={"140px"}
+        px={2}
+      >
+        Basic
+      </Badge>
     </Box>
   );
 };
@@ -42,7 +61,7 @@ export const ListItem2 = ({ user }) => {
 };
 
 export const Company = ({ user }) => {
-  const { name, catchPhrase, bs } = user.company;
+  const { name, catchPhrase, bs } = user.company || {};
   return (
     <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
       <HStack spacing={"10px"}>
@@ -64,13 +83,14 @@ export const Company = ({ user }) => {
 };
 
 export const Address = ({ user }) => {
-  const { city, street, suite, geo, zipcode } = user.address;
+  const { city, street, suite, geo, zipcode } = user.address || {};
   return (
     <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
       <HStack spacing={"10px"}>
         <Text as="b">Geo:</Text>
         <Text color={"blue.500"}>
-          lat:{<Badge>{geo.lat}</Badge>} long:{<Badge>{geo.lng}</Badge>}
+          lat:{<Badge>{geo && geo.lat}</Badge>} long:
+          {<Badge>{geo && geo.lng}</Badge>}
         </Text>
       </HStack>
       <HStack spacing={"10px"}>
