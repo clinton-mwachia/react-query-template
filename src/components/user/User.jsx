@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { getUser } from "./Helpers";
 import { useQuery } from "@tanstack/react-query";
-import { SimpleGrid, Box, Container, Badge } from "@chakra-ui/react";
+import { SimpleGrid, Box, Container, Badge, Button } from "@chakra-ui/react";
 import { Address, Company, ListItem1, ListItem2 } from "./ListItem";
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, EditIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/react";
 
 const User = () => {
@@ -53,6 +53,9 @@ const User = () => {
               <ArrowBackIcon boxSize={6} />
             </Link>
           </Badge>
+          <Button ml={2} mt={2} p={2}>
+            <EditIcon boxSize={6} />
+          </Button>
         </Box>
         <Box w={"100%"}>
           <Address user={user} />

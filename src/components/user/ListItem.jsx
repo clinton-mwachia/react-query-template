@@ -6,12 +6,12 @@ export const ListItem1 = ({ user }) => {
   return (
     <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
       <HStack spacing={"10px"}>
-        <Text as="b">User ID:</Text>
-        <Text noOfLines={1}>{id}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
         <Text as="b">Name:</Text>
         <Text color={"purple.500"}>{name}</Text>
+      </HStack>
+      <HStack spacing={"10px"}>
+        <Text as="b">User ID:</Text>
+        <Text noOfLines={1}>{id}</Text>
       </HStack>
       <HStack spacing={"10px"}>
         <Text as="b">Username:</Text>
@@ -26,16 +26,16 @@ export const ListItem2 = ({ user }) => {
   return (
     <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
       <HStack spacing={"10px"}>
+        <Text as="b">Email:</Text>
+        <Text color={"tomato"}>{email}</Text>
+      </HStack>
+      <HStack spacing={"10px"}>
         <Text as="b">Phone:</Text>
         <Text noOfLines={1}>{phone}</Text>
       </HStack>
       <HStack spacing={"10px"}>
         <Text as="b">Website:</Text>
         <Text color={"purple.500"}>{website}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Email:</Text>
-        <Text color={"tomato"}>{email}</Text>
       </HStack>
     </Box>
   );
@@ -68,13 +68,9 @@ export const Address = ({ user }) => {
   return (
     <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
       <HStack spacing={"10px"}>
-        <Text as="b">Suite:</Text>
-        <Text color={"blue.500"}>{suite}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Zipcode:</Text>
-        <Text noOfLines={1} color={"blue.500"}>
-          {zipcode}
+        <Text as="b">Geo:</Text>
+        <Text color={"blue.500"}>
+          lat:{<Badge>{geo.lat}</Badge>} long:{<Badge>{geo.lng}</Badge>}
         </Text>
       </HStack>
       <HStack spacing={"10px"}>
@@ -82,13 +78,17 @@ export const Address = ({ user }) => {
         <Text color={"blue.500"}>{city}</Text>
       </HStack>
       <HStack spacing={"10px"}>
+        <Text as="b">Suite:</Text>
+        <Text color={"blue.500"}>{suite}</Text>
+      </HStack>
+      <HStack spacing={"10px"}>
         <Text as="b">Street:</Text>
         <Text color={"blue.500"}>{street}</Text>
       </HStack>
       <HStack spacing={"10px"}>
-        <Text as="b">Geo:</Text>
-        <Text color={"blue.500"}>
-          lat:{<Badge>{geo.lat}</Badge>} long:{<Badge>{geo.lng}</Badge>}
+        <Text as="b">Zipcode:</Text>
+        <Text noOfLines={1} color={"blue.500"}>
+          {zipcode}
         </Text>
       </HStack>
     </Box>
