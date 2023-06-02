@@ -1,9 +1,16 @@
 import { Link, useParams } from "react-router-dom";
-import { getUser } from "./Helpers";
-import { useQuery } from "@tanstack/react-query";
+import { getUser, deleteUser } from "./Helpers";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { SimpleGrid, Box, Container, Badge, Button } from "@chakra-ui/react";
 import { Address, Company, ListItem1, ListItem2 } from "./ListItem";
-import { ArrowBackIcon, EditIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
+
+import {
+  ArrowBackIcon,
+  EditIcon,
+  SmallCloseIcon,
+  DeleteIcon,
+} from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/react";
 import { useState } from "react";
 import EditUser from "./EditUser";
@@ -22,7 +29,14 @@ const User = () => {
     queryFn: () => getUser(id),
     networkMode: "offlineFirst",
   });
-
+  const queryClient = useQueryClient();
+  const navigation = useNavigate();
+  const mutation = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+  });
   if (isLoading) {
     return <span>Loading...</span>;
   }
@@ -34,6 +48,12 @@ const User = () => {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    mutation.mutate({ id });
+    navigation("/");
+  };
   return (
     <Container maxW={"2xl"} p={4}>
       <Box
@@ -71,6 +91,11 @@ const User = () => {
         <Button ml={2} mt={2} p={2} onClick={() => setEdit(!edit)}>
           {edit ? <SmallCloseIcon boxSize={6} /> : <EditIcon boxSize={6} />}
         </Button>
+        {edit ? null : (
+          <Button ml={2} mt={2} p={2} onClick={handleDelete}>
+            <DeleteIcon boxSize={6} />
+          </Button>
+        )}
       </Box>
     </Container>
   );
