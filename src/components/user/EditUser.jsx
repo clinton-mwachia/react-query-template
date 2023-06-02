@@ -104,82 +104,139 @@ const EditUser = ({ user }) => {
             Basic
           </Badge>
         </Box>
-        <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
-          <HStack spacing={"10px"}>
-            <Text as="b">Email</Text>
-            <input
-              type="string"
-              value={User.email}
-              onChange={(e) => onInputChange(e, "email")}
-            />
-          </HStack>
-          <HStack spacing={"10px"}>
-            <Text as={"b"}>Phone:</Text>
-            <input
-              type="string"
-              value={User.phone}
-              onChange={(e) => onInputChange(e, "phone")}
-            />
-          </HStack>
-          <HStack spacing={"10px"}>
-            <Text as={"b"}>Website:</Text>
-            <input
-              type="string"
-              value={User.website}
-              onChange={(e) => onInputChange(e, "website")}
-            />
-          </HStack>
+        <Box
+          w={"100%"}
+          p={2}
+          border={"1px"}
+          borderColor="gray.300"
+          position={"relative"}
+        >
+          <Box position={"relative"} zIndex={1}>
+            <HStack spacing={"10px"}>
+              <Text as="b">Email</Text>
+              <input
+                type="string"
+                value={User.email}
+                onChange={(e) => onInputChange(e, "email")}
+              />
+            </HStack>
+            <HStack spacing={"10px"}>
+              <Text as={"b"}>Phone:</Text>
+              <input
+                type="string"
+                value={User.phone}
+                onChange={(e) => onInputChange(e, "phone")}
+              />
+            </HStack>
+            <HStack spacing={"10px"}>
+              <Text as={"b"}>Website:</Text>
+              <input
+                type="string"
+                value={User.website}
+                onChange={(e) => onInputChange(e, "website")}
+              />
+            </HStack>
+          </Box>
+          <Badge
+            position={"absolute"}
+            backgroundColor={"red.200"}
+            transform="translateX(-50%)"
+            zIndex={2}
+            top={"-10px"}
+            left={"50%"}
+            px={2}
+          >
+            Contact
+          </Badge>
         </Box>
-        <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
-          <HStack spacing={"10px"}>
-            <Text as="b">Bs:</Text>
-            <Text color={"blue.500"}>
-              <Badge>{User.company.bs}</Badge>
-            </Text>
-          </HStack>
-          <HStack spacing={"10px"}>
-            <Text as="b">Name:</Text>
-            <Text color={"blue.500"}>
-              <Badge>{User.company.name}</Badge>
-            </Text>
-          </HStack>
-          <HStack spacing={"10px"}>
-            <Text as="b">CatchPhrase:</Text>
-            <Text color={"blue.500"}>{User.company.catchPhrase}</Text>
-          </HStack>
+        <Box
+          w={"100%"}
+          p={2}
+          border={"1px"}
+          borderColor="gray.300"
+          position={"relative"}
+        >
+          <Box position={"relative"} zIndex={1}>
+            <HStack spacing={"10px"}>
+              <Text as="b">Bs:</Text>
+              <Text color={"blue.500"}>
+                <Badge>{User.company.bs}</Badge>
+              </Text>
+            </HStack>
+            <HStack spacing={"10px"}>
+              <Text as="b">Name:</Text>
+              <Text color={"blue.500"}>
+                <Badge>{User.company.name}</Badge>
+              </Text>
+            </HStack>
+            <HStack spacing={"10px"}>
+              <Text as="b">CatchPhrase:</Text>
+              <Text color={"blue.500"}>{User.company.catchPhrase}</Text>
+            </HStack>
+          </Box>
+          <Badge
+            position={"absolute"}
+            backgroundColor={"red.200"}
+            transform="translateX(-50%)"
+            zIndex={2}
+            top={"-10px"}
+            left={"50%"}
+            px={2}
+          >
+            Company
+          </Badge>
         </Box>
-        <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
-          <HStack spacing={"10px"}>
-            <Text as="b">Geo:</Text>
-            <Text color={"blue.500"}>
-              lat: <Badge>{User.address.geo.lat}</Badge>
-              long: <Badge>{User.address.geo.lng}</Badge>
-            </Text>
-          </HStack>
-          <HStack spacing={"10px"}>
-            <Text as="b">City:</Text>
-            <Text color={"blue.500"}>
-              <Badge>{User.address.city}</Badge>
-            </Text>
-          </HStack>
-          <HStack spacing={"10px"}>
-            <Text as="b">Suite:</Text>
-            <Text color={"blue.500"}>
-              <Badge>{User.address.suite}</Badge>
-            </Text>
-          </HStack>
-          <HStack spacing={"10px"}>
-            <Text as="b">Street:</Text>
-            <Text color={"blue.500"}>
-              <Badge>{User.address.street}</Badge>
-            </Text>
-          </HStack>
-          <HStack spacing={"10px"}>
-            <Text as="b">Zipcode:</Text>
-            <Text color={"blue.500"}>
-              <Badge>{User.address.zipcode}</Badge>
-            </Text>
-          </HStack>
+        <Box
+          w={"100%"}
+          p={2}
+          border={"1px"}
+          borderColor="gray.300"
+          position={"relative"}
+        >
+          <Box position={"relative"} zIndex={1}>
+            <HStack spacing={"10px"}>
+              <Text as="b">Geo:</Text>
+              <Text color={"blue.500"}>
+                lat: <Badge>{User.address.geo.lat}</Badge>
+                long: <Badge>{User.address.geo.lng}</Badge>
+              </Text>
+            </HStack>
+            <HStack spacing={"10px"}>
+              <Text as="b">City:</Text>
+              <Text color={"blue.500"}>
+                <Badge>{User.address.city}</Badge>
+              </Text>
+            </HStack>
+            <HStack spacing={"10px"}>
+              <Text as="b">Suite:</Text>
+              <Text color={"blue.500"}>
+                <Badge>{User.address.suite}</Badge>
+              </Text>
+            </HStack>
+            <HStack spacing={"10px"}>
+              <Text as="b">Street:</Text>
+              <Text color={"blue.500"}>
+                <Badge>{User.address.street}</Badge>
+              </Text>
+            </HStack>
+            <HStack spacing={"10px"}>
+              <Text as="b">Zipcode:</Text>
+              <Text color={"blue.500"}>
+                <Badge>{User.address.zipcode}</Badge>
+              </Text>
+            </HStack>
+          </Box>
+          <Badge
+            position={"absolute"}
+            backgroundColor={"red.200"}
+            transform="translateX(-50%)"
+            zIndex={2}
+            top={"-10px"}
+            left={"50%"}
+            px={2}
+          >
+            Location
+          </Badge>
         </Box>
       </SimpleGrid>
       <Button type="submmit" mt={2}>
