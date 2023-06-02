@@ -6,7 +6,7 @@ CLONE THE REPO
 `git clone https://github.com/clinton-mwachia/react-query-template.git`
 
 START THE SERVER
-`json-server --watch db.json` (incase it does'nt work in terminal, use cmd)
+`json-server --watch db.json` (incase it doesn't work in terminal, use cmd)
 
 START THE APP
 `npm run dev`
@@ -20,3 +20,6 @@ START THE APP
 
 3. User Details
 <img src="/src/assets/user-detail.png" width="400">
+
+3. Edit User
+<img src="/src/assets/edit-user.png" width="400">
