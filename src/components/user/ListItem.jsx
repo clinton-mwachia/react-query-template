@@ -28,7 +28,7 @@ export const ListItem1 = ({ user }) => {
 
       <Badge
         position={"absolute"}
-        backgroundColor={"red.200"}
+        backgroundColor={"teal.500"}
         transform="translateX(-50%)"
         zIndex={2}
         top={"-10px"}
@@ -44,19 +44,39 @@ export const ListItem1 = ({ user }) => {
 export const ListItem2 = ({ user }) => {
   const { phone, website, email } = user;
   return (
-    <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
-      <HStack spacing={"10px"}>
-        <Text as="b">Email:</Text>
-        <Text color={"tomato"}>{email}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Phone:</Text>
-        <Text noOfLines={1}>{phone}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Website:</Text>
-        <Text color={"purple.500"}>{website}</Text>
-      </HStack>
+    <Box
+      w={"100%"}
+      p={2}
+      border={"1px"}
+      borderColor="gray.300"
+      position={"relative"}
+    >
+      <Box position={"relative"} zIndex={1}>
+        <HStack spacing={"10px"}>
+          <Text as="b">Email:</Text>
+          <Text color={"tomato"}>{email}</Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">Phone:</Text>
+          <Text noOfLines={1}>{phone}</Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">Website:</Text>
+          <Text color={"purple.500"}>{website}</Text>
+        </HStack>
+      </Box>
+
+      <Badge
+        position={"absolute"}
+        backgroundColor={"teal.500"}
+        transform="translateX(-50%)"
+        zIndex={2}
+        top={"-10px"}
+        left={"50%"}
+        px={2}
+      >
+        Contact
+      </Badge>
     </Box>
   );
 };
@@ -64,21 +84,41 @@ export const ListItem2 = ({ user }) => {
 export const Company = ({ user }) => {
   const { name, catchPhrase, bs } = user.company || {};
   return (
-    <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
-      <HStack spacing={"10px"}>
-        <Text as="b">Bs:</Text>
-        <Text color={"blue.500"}>{bs}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Name:</Text>
-        <Text noOfLines={1} color={"blue.500"}>
-          {name}
-        </Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">CatchPhrase:</Text>
-        <Text color={"blue.500"}>{catchPhrase}</Text>
-      </HStack>
+    <Box
+      w={"100%"}
+      p={2}
+      border={"1px"}
+      borderColor="gray.300"
+      position={"relative"}
+    >
+      <Box position={"relative"} zIndex={1}>
+        <HStack spacing={"10px"}>
+          <Text as="b">Bs:</Text>
+          <Text color={"blue.500"}>{bs}</Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">Name:</Text>
+          <Text noOfLines={1} color={"blue.500"}>
+            {name}
+          </Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">CatchPhrase:</Text>
+          <Text color={"blue.500"}>{catchPhrase}</Text>
+        </HStack>
+      </Box>
+
+      <Badge
+        position={"absolute"}
+        backgroundColor={"teal.500"}
+        transform="translateX(-50%)"
+        zIndex={2}
+        top={"-10px"}
+        left={"50%"}
+        px={2}
+      >
+        Company
+      </Badge>
     </Box>
   );
 };
@@ -86,32 +126,51 @@ export const Company = ({ user }) => {
 export const Address = ({ user }) => {
   const { city, street, suite, geo, zipcode } = user.address || {};
   return (
-    <Box w={"100%"} p={2} border={"1px"} borderColor="gray.300">
-      <HStack spacing={"10px"}>
-        <Text as="b">Geo:</Text>
-        <Text color={"blue.500"}>
-          lat:{<Badge>{geo && geo.lat}</Badge>} long:
-          {<Badge>{geo && geo.lng}</Badge>}
-        </Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">City:</Text>
-        <Text color={"blue.500"}>{city}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Suite:</Text>
-        <Text color={"blue.500"}>{suite}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Street:</Text>
-        <Text color={"blue.500"}>{street}</Text>
-      </HStack>
-      <HStack spacing={"10px"}>
-        <Text as="b">Zipcode:</Text>
-        <Text noOfLines={1} color={"blue.500"}>
-          {zipcode}
-        </Text>
-      </HStack>
+    <Box
+      w={"100%"}
+      p={2}
+      border={"1px"}
+      borderColor="gray.300"
+      position={"relative"}
+    >
+      <Box position={"relative"} zIndex={1}>
+        <HStack spacing={"10px"}>
+          <Text as="b">Geo:</Text>
+          <Text color={"blue.500"}>
+            lat:{<Badge>{geo && geo.lat}</Badge>} long:
+            {<Badge>{geo && geo.lng}</Badge>}
+          </Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">City:</Text>
+          <Text color={"blue.500"}>{city}</Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">Suite:</Text>
+          <Text color={"blue.500"}>{suite}</Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">Street:</Text>
+          <Text color={"blue.500"}>{street}</Text>
+        </HStack>
+        <HStack spacing={"10px"}>
+          <Text as="b">Zipcode:</Text>
+          <Text noOfLines={1} color={"blue.500"}>
+            {zipcode}
+          </Text>
+        </HStack>
+      </Box>
+      <Badge
+        position={"absolute"}
+        backgroundColor={"teal.500"}
+        transform="translateX(-50%)"
+        zIndex={2}
+        top={"-10px"}
+        left={"50%"}
+        px={2}
+      >
+        Location
+      </Badge>
     </Box>
   );
 };
