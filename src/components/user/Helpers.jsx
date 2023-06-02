@@ -9,3 +9,8 @@ export const updateUser = async ({ id, formData }) => {
   const { data } = await Axios.put(`/users/${id}`, formData);
   return data;
 };
+
+export const deleteUser = async ({ id }) => {
+  const { data } = await Axios.delete(`/users/${id}`);
+  return data;
+};
