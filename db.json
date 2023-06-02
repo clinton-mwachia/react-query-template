@@ -5,29 +5,6 @@
       "id": 1
     },
     {
-      "name": "Ervin Howell",
-      "username": "Antonett",
-      "email": "Shanna@melissa.tv",
-      "phone": "010-692-6593 x09125",
-      "website": "anastasia.net",
-      "id": 2,
-      "company": {
-        "name": "Deckow-Crist",
-        "bs": "synergize scalable supply-chains",
-        "catchPhrase": "Proactive didactic contingency"
-      },
-      "address": {
-        "city": "Wisokyburgh",
-        "street": "Victor Plains",
-        "suite": "Suite 879",
-        "geo": {
-          "lat": "-43.9509",
-          "lng": "-34.4618"
-        },
-        "zipcode": "90566-7771"
-      }
-    },
-    {
       "id": 3,
       "name": "Clementine Bauch",
       "username": "Samantha",
@@ -48,29 +25,6 @@
         "name": "Romaguera-Jacobson",
         "catchPhrase": "Face to face bifurcated interface",
         "bs": "e-enable strategic applications"
-      }
-    },
-    {
-      "name": "Patricia Lebsack2",
-      "username": "Karianne2",
-      "email": "Julianne.OConner2@kory.org",
-      "phone": "493-170-9623 x152",
-      "website": "kale2.biz",
-      "id": 4,
-      "company": {
-        "name": "Robel-Corkery",
-        "bs": "transition cutting-edge web services",
-        "catchPhrase": "Multi-tiered zero tolerance productivity"
-      },
-      "address": {
-        "city": "South Elvis",
-        "street": "Hoeger Mall",
-        "suite": "Apt. 692",
-        "geo": {
-          "lat": "29.4572",
-          "lng": "-164.2990"
-        },
-        "zipcode": "53919-4257"
       }
     },
     {
