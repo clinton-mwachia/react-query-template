@@ -6,9 +6,11 @@ CLONE THE REPO
 `git clone https://github.com/clinton-mwachia/react-query-template.git`
 
 START THE SERVER
-`json-server --watch db.json` (incase it doesn't work in terminal, use cmd)
+`cd server`
+`npm run dev`
 
 START THE APP
+`cd client`
 `npm run dev`
 
 #Features
