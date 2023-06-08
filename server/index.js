@@ -31,7 +31,7 @@ morgan.token("localdatetime", (req, res) => {
 /**
  * middlewares
  */
-
+app.use(cors());
 app.use(express.json());
 app.use(
   morgan(
