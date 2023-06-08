@@ -17,46 +17,29 @@ import {
   ModalContent,
   Input,
 } from "@chakra-ui/react";
-import { getUsers } from "./Helpers";
+import { getPosts } from "./Helpers";
 import { useQuery } from "@tanstack/react-query";
 import Card from "./Card";
 import Search from "./Search";
 import { useState } from "react";
-//TODO: ADD USER FUNCTIONALITY
-const Users = () => {
-  let emptyUser = {
-    id: 1,
-    name: "Leanne Graham",
-    username: "Bret",
-    email: "Sincere@april.biz",
-    address: {
-      street: "Kulas Light",
-      suite: "Apt. 556",
-      city: "Gwenborough",
-      zipcode: "92998-3874",
-      geo: {
-        lat: "-37.3159",
-        lng: "81.1496",
-      },
-    },
-    phone: "1-770-736-8031 x56442",
-    website: "hildegard.org",
-    company: {
-      name: "Romaguera-Crona",
-      catchPhrase: "Multi-layered client-server neural-net",
-      bs: "harness real-time e-markets",
-    },
+
+const Posts = () => {
+  let emptyPost = {
+    body: "",
+    id: 0,
+    title: "",
+    userId: 0,
   };
   const [searchText, setSearchText] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(emptyUser);
+  const [post, setPost] = useState(emptyPost);
   const {
     isLoading,
     isError,
-    data: users,
+    data: posts,
     error,
     isPaused,
-  } = useQuery(["users"], getUsers, {
+  } = useQuery(["posts"], getPosts, {
     networkMode: "offlineFirst",
   });
 
@@ -72,36 +55,36 @@ const Users = () => {
     return <span>Error: {error.message}</span>;
   }
 
-  const filteredUsers =
-    users &&
-    users.filter((item) =>
-      item.name?.toLowerCase().includes(searchText.toLowerCase())
+  const filteredPosts =
+    posts &&
+    posts.filter((item) =>
+      item.title?.toLowerCase().includes(searchText.toLowerCase())
     );
 
   const suggestionsData =
-    users &&
-    users.filter((item) =>
-      item.name?.toLowerCase().startsWith(searchText.toLowerCase())
+    posts &&
+    posts.filter((item) =>
+      item.title?.toLowerCase().startsWith(searchText.toLowerCase())
     );
 
   const onInputChange = (e, name) => {
     const val = (e.target && e.target.value) || "";
-    let _user = { ...user };
+    let _post = { ...post };
 
-    _user[`${name}`] = val;
+    _post[`${name}`] = val;
 
-    setUser(_user);
+    setPost(_post);
   };
-
+  /*
   const onInputNumChange = (e, name) => {
     const val = (e.target && e.target.value) || 0;
-    let _user = { ...user };
+    let _post = { ...post };
 
-    _user[`${name}`] = val;
+    _post[`${name}`] = val;
 
-    setUser(_user);
+    setPost(_post);
   };
-
+*/
   return (
     <Box>
       <Stack
@@ -128,7 +111,7 @@ const Users = () => {
           />
         </Box>
         <Box>
-          <Button onClick={() => setIsOpen(true)}>Add User</Button>
+          <Button onClick={() => setIsOpen(true)}>Add Post</Button>
         </Box>
       </Stack>
 
@@ -136,7 +119,7 @@ const Users = () => {
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Create new User</ModalHeader>
+            <ModalHeader>Create new Post</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
               <form>
@@ -144,7 +127,7 @@ const Users = () => {
                   <FormLabel>Name</FormLabel>
                   <Input
                     placeholder="First name"
-                    value={user.name}
+                    value={post.name}
                     onChange={(e) => onInputChange(e, "name")}
                   />
                 </FormControl>
@@ -153,7 +136,7 @@ const Users = () => {
                   <FormLabel>Email</FormLabel>
                   <Input
                     placeholder="email"
-                    value={user.email}
+                    value={post.email}
                     onChange={(e) => onInputChange(e, "email")}
                   />
                 </FormControl>
@@ -179,7 +162,7 @@ const Users = () => {
       </>
 
       <Container maxW={"4xl"} mb={7} p={5}>
-        {filteredUsers && filteredUsers.length > 0 ? (
+        {filteredPosts && filteredPosts.length > 0 ? (
           <SimpleGrid
             columns={{ base: 3, md: 3, sm: 1 }}
             spacing={"10px"}
@@ -187,16 +170,16 @@ const Users = () => {
             justify="center"
             mt={2}
           >
-            {filteredUsers.map((user, index) => (
+            {filteredPosts.map((post, index) => (
               <div key={index}>
-                <Card name={user.name} href={`users/${user.id}`} />
+                <Card title={post.title} href={`posts/${post.id}`} />
               </div>
             ))}
           </SimpleGrid>
         ) : (
           <Box textAlign={"center"} p={3}>
             <Text fontFamily={"ink free"} fontSize={"20"} fontWeight={"bold"}>
-              No users found
+              No posts found
             </Text>
           </Box>
         )}
@@ -205,4 +188,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Posts;

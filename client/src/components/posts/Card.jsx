@@ -2,7 +2,7 @@ import { Box, Button, Heading, Stack } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const Card = ({ name, href }) => {
+const Card = ({ title, href }) => {
   return (
     <Box
       maxW={{ base: "full", md: "275px" }}
@@ -18,7 +18,9 @@ const Card = ({ name, href }) => {
     >
       <Stack align={"center"} spacing={2}>
         <Box mt={2}>
-          <Heading size="md">@{name}</Heading>
+          <Heading size="md" noOfLines={1}>
+            @{title}
+          </Heading>
         </Box>
         <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
           <Link to={`${href}`}>Learn more</Link>
@@ -29,7 +31,7 @@ const Card = ({ name, href }) => {
 };
 
 Card.propTypes = {
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
 };
 

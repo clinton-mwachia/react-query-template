@@ -7,7 +7,7 @@ const Search = ({ searchText, setSearchText, suggestions }) => {
       <Input
         type="text"
         name="search"
-        placeholder="search users..."
+        placeholder="search posts..."
         value={searchText}
         onChange={(e) => {
           setSearchText(e.target.value);
@@ -16,7 +16,7 @@ const Search = ({ searchText, setSearchText, suggestions }) => {
       <List bg={"green.200"}>
         {searchText.length > 0
           ? suggestions.map((item, index) => (
-              <ListItem key={index}>{item.name}</ListItem>
+              <ListItem key={index}>{item.title}</ListItem>
             ))
           : null}
       </List>
