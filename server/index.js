@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
+const moment = require("moment-timezone");
 require("dotenv").config();
 
 /**
@@ -20,14 +21,21 @@ const app = express();
  * import routes
  */
 const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comments");
+
+// Define a custom format function for Morgan
+morgan.token("localdatetime", (req, res) => {
+  return moment().format("YYYY-MM-DD HH:mm:ss");
+});
 
 /**
  * middlewares
  */
+
 app.use(express.json());
 app.use(
   morgan(
-    '{"date": ":date[iso]", "method": ":method", "url": ":url", "status": ":status", "response-time": ":response-time ms"}'
+    '{"date": ":localdatetime", "method": ":method", "url": ":url", "status": ":status", "response-time": ":response-time ms"}'
   )
 );
 
@@ -35,7 +43,7 @@ app.use(
  * routes
  */
 app.use(`${API}/posts`, postRoutes);
-
+app.use(`${API}/comments`, commentRoutes);
 /**
  * connect to the db
  */
