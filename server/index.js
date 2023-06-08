@@ -17,6 +17,11 @@ const API = process.env.API;
 const app = express();
 
 /**
+ * import routes
+ */
+const postRoutes = require("./routes/posts");
+
+/**
  * middlewares
  */
 app.use(express.json());
@@ -29,9 +34,7 @@ app.use(
 /**
  * routes
  */
-app.use(`${API}/`, (req, res) => {
-  res.json({ message: "setup completes" });
-});
+app.use(`${API}/posts`, postRoutes);
 
 /**
  * connect to the db
