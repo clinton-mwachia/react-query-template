@@ -16,14 +16,12 @@ START THE APP
 `cd client` && `npm run dev`
 
 #Features
-1. View All Users
-<img src="/client/src/assets/learn-react-query.png" width="400">
+1. View All Posts
+<img src="/client/src/assets/view-all-posts.png" width="400">
 
-2. Search Users + suggestions
-<img src="/client/src/assets/learn-react-query-search.png" width="400">
+2. Search Posts + suggestions
+<img src="/client/src/assets/search-posts.png" width="400">
 
-3. User Details
-<img src="/client/src/assets/user-detail.png" width="400">
+3. Post Comments
+<img src="/client/src/assets/post-comments.png" width="400">
 
-3. Edit User
-<img src="/src/assets/edit-user.png" width="400">
