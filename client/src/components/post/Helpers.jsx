@@ -10,12 +10,12 @@ export const getCommentsByPostId = async (id) => {
   return data;
 };
 
-export const updatePost = async ({ id, formData }) => {
-  const { data } = await Axios.put(`/posts/${id}`, formData);
+export const updateComment = async ({ id, formData }) => {
+  const { data } = await Axios.put(`/comments/${id}`, formData);
   return data;
 };
 
-export const deleteComment = async ({ id }) => {
+export const deleteComment = async (id) => {
   const { data } = await Axios.delete(`/comments/${id}`);
   return data;
 };

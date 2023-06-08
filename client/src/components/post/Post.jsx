@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { getPost, deleteComment, getCommentsByPostId } from "./Helpers";
+import { deleteComment, getCommentsByPostId } from "./Helpers";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   SimpleGrid,
@@ -8,84 +8,58 @@ import {
   Badge,
   Button,
   Text,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
+  ModalCloseButton,
+  ModalHeader,
 } from "@chakra-ui/react";
 import { ListComments } from "./ListItem";
-import { useNavigate } from "react-router-dom";
 
-import {
-  ArrowBackIcon,
-  EditIcon,
-  SmallCloseIcon,
-  DeleteIcon,
-} from "@chakra-ui/icons";
+import { ArrowBackIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/react";
 import { useState } from "react";
-//import EditComment from "./EditComment";
+import EditComment from "./EditComment";
 
 const Post = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
+  const [editComm, setEditComm] = useState();
+
   const {
     isLoading,
     isError,
-    data: post,
+    data: comments,
     error,
     isPaused,
-  } = useQuery({
-    queryKey: ["posts", id],
-    queryFn: () => getPost(id),
-    networkMode: "offlineFirst",
-  });
-
-  const {
-    isLoading: isLoading1,
-    isError: isError1,
-    data: comments,
-    error: error1,
-    isPaused: isPaused1,
   } = useQuery({
     queryKey: ["comments", id],
     queryFn: () => getCommentsByPostId(id),
     networkMode: "offlineFirst",
   });
 
-  /* const queryClient = useQueryClient();
-    const mutation = useMutation({
-      mutationFn: deletePost,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["posts"] });
-      },
-    });*/
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: deleteComment,
+    networkMode: "offlineFirst",
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["comments", id] });
+      alert(data.message);
+    },
+  });
+
   if (isLoading) {
-    return <span>Loading...</span>;
-  }
-
-  if (isPaused) {
-    return <span>Cannot fetch data, you are offline</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
-
-  if (isLoading1) {
     return <span>Loading comments...</span>;
   }
 
-  if (isPaused1) {
+  if (isPaused) {
     return <span>Cannot fetch comments, you are offline</span>;
   }
 
-  if (isError1) {
-    return <span>Error: - comments - {error1.message}</span>;
+  if (isError) {
+    return <span>Error: - comments - {error.message}</span>;
   }
-  const handleDelete = (e, data) => {
-    e.preventDefault();
-    alert(`delete ${data.id}`);
-    // mutation.mutate({ id });
-    navigate("/");
-  };
 
   return (
     <Container maxW={"2xl"} p={4}>
@@ -98,7 +72,7 @@ const Post = () => {
         mb={3}
       >
         <Avatar size={"xl"} bg="teal.500" />
-        <Text>Post id - {post[0].id}</Text>
+        <Text>Post id - {id}</Text>
       </Box>
       <SimpleGrid columns={{ base: 2, md: 2, sm: 1 }} spacing={3}>
         {comments.map((comment) => (
@@ -109,26 +83,20 @@ const Post = () => {
                 ml={2}
                 mt={2}
                 p={2}
-                onClick={() => {
-                  setEdit(!edit);
-                  alert(`edit ${comment.id}`);
-                  navigate(`/edit/comment/${comment.id}`);
+                onClick={(e) => {
+                  e.preventDefault();
+                  setEdit(true);
+                  setEditComm(comment);
                 }}
               >
-                {edit ? (
-                  <>
-                    <SmallCloseIcon boxSize={3} />
-                  </>
-                ) : (
-                  <EditIcon boxSize={3} />
-                )}
+                <EditIcon boxSize={3} />
               </Button>
               {edit ? null : (
                 <Button
                   ml={2}
                   mt={2}
                   p={2}
-                  onClick={(e) => handleDelete(e, comment)}
+                  onClick={() => mutation.mutate(comment.id)}
                 >
                   <DeleteIcon boxSize={3} />
                 </Button>
@@ -144,6 +112,17 @@ const Post = () => {
           </Link>
         </Badge>
       </Box>
+      {/** edit comment */}
+      <Modal isOpen={edit} onClose={() => setEdit(false)}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalHeader>Update Comment</ModalHeader>
+          <ModalBody pb={6}>
+            <EditComment comment={editComm} postId={id} setEdit={setEdit} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };
