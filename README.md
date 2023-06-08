@@ -5,13 +5,15 @@ To use this project
 CLONE THE REPO
 `git clone https://github.com/clinton-mwachia/react-query-template.git`
 
-START THE SERVER
-`cd server`
-`npm run dev`
+THE SERVER
+1. Create an `.env` file With the following:
+ - DB=mongodb://127.0.0.1:27017/db-name (NOTE: you can use any other DB)
+ - PORT=8010
+ - API=/api/v0
+2. `cd server` && `npm run dev`
 
 START THE APP
-`cd client`
-`npm run dev`
+`cd client` && `npm run dev`
 
 #Features
 1. View All Users
