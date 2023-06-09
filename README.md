@@ -25,3 +25,6 @@ START THE APP
 3. Post Comments
 <img src="/client/src/assets/post-comments.png" width="400">
 
+3. Update Comment
+<img src="/client/src/assets/edit-comment.png" width="400">
+
