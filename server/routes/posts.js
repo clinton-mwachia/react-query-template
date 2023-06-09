@@ -39,12 +39,25 @@ router.post("/register", async (req, res) => {
  * get all posts
  */
 router.get("/", async (req, res) => {
+  const { page, limit } = req.query;
+  const pageNumber = parseInt(page) || 1;
+  const pageSize = parseInt(limit) || 10;
   try {
-    const posts = await Post.find();
+    const totalPosts = await Post.countDocuments();
+    const totalPages = Math.ceil(totalPosts / pageSize);
+
+    const posts = await Post.find()
+      .skip((pageNumber - 1) * pageSize)
+      .limit(pageSize);
+
     if (!posts) {
       return res.status(404).json({ message: "No posts found" });
     } else {
-      return res.send(posts);
+      return res.send({
+        totalPages: totalPages,
+        data: posts,
+        hasMore: page < totalPages,
+      });
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
