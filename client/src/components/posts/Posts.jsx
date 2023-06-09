@@ -18,10 +18,10 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { getPosts } from "./Helpers";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Card from "./Card";
 import Search from "./Search";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Posts = () => {
   let emptyPost = {
@@ -33,15 +33,42 @@ const Posts = () => {
   const [searchText, setSearchText] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [post, setPost] = useState(emptyPost);
+  const [page, setPage] = useState(1);
+  const queryClient = useQueryClient();
   const {
     isLoading,
     isError,
     data: posts,
     error,
     isPaused,
-  } = useQuery(["posts"], getPosts, {
-    networkMode: "offlineFirst",
-  });
+    isPreviousData,
+    isFetching,
+  } = useQuery(
+    {
+      queryKey: ["posts", page],
+      queryFn: () => getPosts({ page: page, limit: 10 }),
+      keepPreviousData: true,
+      staleTime: 5000,
+    },
+    {
+      networkMode: "offlineFirst",
+    }
+  );
+
+  // Prefetch the next page posts
+  useEffect(() => {
+    if (!isPreviousData && posts?.hasMore) {
+      queryClient.prefetchQuery(
+        {
+          queryKey: ["posts", page],
+          queryFn: () => getPosts({ page: page, limit: 10 }),
+        },
+        {
+          networkMode: "offlineFirst",
+        }
+      );
+    }
+  }, [posts, isPreviousData, page, queryClient]);
 
   if (isLoading) {
     return <span>Loading data...</span>;
@@ -57,13 +84,13 @@ const Posts = () => {
 
   const filteredPosts =
     posts &&
-    posts.filter((item) =>
+    posts.data.filter((item) =>
       item.title?.toLowerCase().includes(searchText.toLowerCase())
     );
 
   const suggestionsData =
     posts &&
-    posts.filter((item) =>
+    posts.data.filter((item) =>
       item.title?.toLowerCase().startsWith(searchText.toLowerCase())
     );
 
@@ -85,6 +112,7 @@ const Posts = () => {
     setPost(_post);
   };
 */
+
   return (
     <Box>
       <Stack
@@ -183,6 +211,24 @@ const Posts = () => {
             </Text>
           </Box>
         )}
+        <Text mb={2}>
+          Pages: {page} / {posts.totalPages}
+        </Text>
+        <Button
+          onClick={() => setPage((old) => Math.max(old - 1, 0))}
+          isDisabled={page === 1}
+        >
+          Previous Page
+        </Button>{" "}
+        <Button
+          onClick={() => {
+            setPage((old) => (posts?.hasMore ? old + 1 : old));
+          }}
+          isDisabled={isPreviousData || !posts?.hasMore}
+        >
+          Next Page
+        </Button>
+        {isFetching ? <span> Loading...</span> : null}{" "}
       </Container>
     </Box>
   );
