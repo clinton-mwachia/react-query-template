@@ -96,7 +96,7 @@ EditComment.propTypes = {
     body: PropTypes.string,
     formData: PropTypes.arrayOf(PropTypes.string, PropTypes.number),
   }),
-  postId: PropTypes.number,
+  postId: PropTypes.string,
   setEdit: PropTypes.func,
 };
 
