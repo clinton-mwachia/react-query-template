@@ -4,7 +4,6 @@
  */
 const express = require("express");
 const Post = require("../models/posts");
-const mongoose = require("mongoose");
 
 /**
  * defining the route
@@ -17,8 +16,9 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
     let post_exists = await Post.findOne({ id: req.body.id });
+
     if (post_exists) {
-      return res.json({ message: "Post Id exists" });
+      return res.status(400).json({ message: "Post Id exists" });
     }
     let obj = new Post(req.body);
     const post = await obj.save();
