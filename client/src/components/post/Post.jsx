@@ -74,37 +74,43 @@ const Post = () => {
         <Avatar size={"xl"} bg="teal.500" />
         <Text>Post id - {id}</Text>
       </Box>
-      <SimpleGrid columns={{ base: 2, md: 2, sm: 1 }} spacing={3}>
-        {comments.map((comment) => (
-          <div key={comment.id}>
-            <ListComments comments={comment} />
-            <Box>
-              <Button
-                ml={2}
-                mt={2}
-                p={2}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setEdit(true);
-                  setEditComm(comment);
-                }}
-              >
-                <EditIcon boxSize={3} />
-              </Button>
-              {edit ? null : (
-                <Button
-                  ml={2}
-                  mt={2}
-                  p={2}
-                  onClick={() => mutation.mutate(comment.id)}
-                >
-                  <DeleteIcon boxSize={3} />
-                </Button>
-              )}
-            </Box>
-          </div>
-        ))}
-      </SimpleGrid>
+      {comments.length > 0 ? (
+        <>
+          <SimpleGrid columns={{ base: 2, md: 2, sm: 1 }} spacing={3}>
+            {comments.map((comment) => (
+              <div key={comment.id}>
+                <ListComments comments={comment} />
+                <Box>
+                  <Button
+                    ml={2}
+                    mt={2}
+                    p={2}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setEdit(true);
+                      setEditComm(comment);
+                    }}
+                  >
+                    <EditIcon boxSize={3} />
+                  </Button>
+                  {edit ? null : (
+                    <Button
+                      ml={2}
+                      mt={2}
+                      p={2}
+                      onClick={() => mutation.mutate(comment.id)}
+                    >
+                      <DeleteIcon boxSize={3} />
+                    </Button>
+                  )}
+                </Box>
+              </div>
+            ))}
+          </SimpleGrid>
+        </>
+      ) : (
+        <Box>No comments</Box>
+      )}
       <Box>
         <Badge p={2} mt={2}>
           <Link to={"/"}>
