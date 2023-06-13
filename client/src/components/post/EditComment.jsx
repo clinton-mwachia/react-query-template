@@ -9,6 +9,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import { updateComment } from "./Helpers";
 
 const EditComment = ({ comment, postId, setEdit }) => {
@@ -25,8 +26,11 @@ const EditComment = ({ comment, postId, setEdit }) => {
     networkMode: "offlineFirst",
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["comments", postId] });
-      alert(data.message);
+      toast.success(data.message);
       setEdit(false);
+    },
+    onError: (data) => {
+      toast.error(data);
     },
   });
 
