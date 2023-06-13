@@ -1,6 +1,7 @@
 # react-query-template
 Learn React query with this project
-To use this project
+
+To use this project, follow the following guidelines:-
 
 CLONE THE REPO
 `git clone https://github.com/clinton-mwachia/react-query-template.git`
