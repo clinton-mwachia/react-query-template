@@ -21,10 +21,12 @@ import { ArrowBackIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/react";
 import { useState } from "react";
 import EditComment from "./EditComment";
+import Form from "./Form";
 
 const Post = () => {
   const { id } = useParams();
   const [edit, setEdit] = useState(false);
+  const [add, setAdd] = useState(false);
   const [editComm, setEditComm] = useState();
 
   const {
@@ -62,7 +64,7 @@ const Post = () => {
   }
 
   return (
-    <Container maxW={"2xl"} p={4}>
+    <Container maxW={"3xl"} p={4}>
       <Box
         w={"100%"}
         textAlign={"center"}
@@ -74,9 +76,24 @@ const Post = () => {
         <Avatar size={"xl"} bg="teal.500" />
         <Text>Post id - {id}</Text>
       </Box>
+      <Box textAlign={"center"} p={2}>
+        <Button
+          colorScheme="blue"
+          w={"100%"}
+          variant="outline"
+          onClick={() => setAdd(!add)}
+        >
+          Comment
+        </Button>
+      </Box>
+      {add ? (
+        <Box>
+          <Form setAdd={setAdd} id={id} />
+        </Box>
+      ) : null}
       {comments.length > 0 ? (
         <>
-          <SimpleGrid columns={{ base: 2, md: 2, sm: 1 }} spacing={3}>
+          <SimpleGrid columns={{ base: 2, md: 2, sm: 1 }} spacing={3} mt={5}>
             {comments.map((comment) => (
               <div key={comment.id}>
                 <ListComments comments={comment} />
