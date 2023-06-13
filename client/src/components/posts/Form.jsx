@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FormControl, Stack, Input, Textarea, Button } from "@chakra-ui/react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { newPost } from "./Helpers";
 
@@ -19,7 +20,10 @@ const Form = ({ setAdd }) => {
     networkMode: "offlineFirst",
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
-      alert(data.message);
+      toast.success(data.message);
+    },
+    onError: (data) => {
+      toast.error(data.response.data.message);
     },
   });
 
