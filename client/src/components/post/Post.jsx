@@ -49,6 +49,9 @@ const Post = () => {
       queryClient.invalidateQueries({ queryKey: ["comments", id] });
       toast.success(data.message);
     },
+    onError: (data) => {
+      toast.error(data);
+    },
   });
 
   if (isLoading) {
