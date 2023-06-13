@@ -4,11 +4,13 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { extendTheme } from "@chakra-ui/react";
 import App from "./App.jsx";
 import Post from "./components/post/Post.jsx";
 import ErrorPage from "./components/errorPage/ErrorPage.jsx";
 import "./index.css";
-import { extendTheme } from "@chakra-ui/react";
+import "react-toastify/dist/ReactToastify.css";
 
 // Update the breakpoints as key-value pairs
 const breakpoints = {
@@ -46,6 +48,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
         <RouterProvider router={router} />
+        <ToastContainer />
         <ReactQueryDevtools />
       </ChakraProvider>
     </QueryClientProvider>

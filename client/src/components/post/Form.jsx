@@ -1,6 +1,14 @@
 import { useState } from "react";
-import { FormControl, Stack, Input, Textarea, Button } from "@chakra-ui/react";
+import {
+  FormControl,
+  Stack,
+  Input,
+  Textarea,
+  Button,
+  Text,
+} from "@chakra-ui/react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { addComment } from "./Helpers";
 
@@ -20,7 +28,10 @@ const Form = ({ setAdd, id }) => {
     networkMode: "offlineFirst",
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["comments", id] });
-      alert(data.message);
+      toast.success(data.message);
+    },
+    onError: (data) => {
+      toast.error(data.response.data.message);
     },
   });
 
@@ -87,11 +98,14 @@ const Form = ({ setAdd, id }) => {
           <label htmlFor="body">Body</label>
           <Textarea
             id="body"
-            name="bodye"
+            name="body"
             type="text"
             onChange={(e) => onInputChange(e, "body")}
             value={comment.body}
           />
+          <Text mt={1} color={comment.body.length > 100 ? "red" : "gray.600"}>
+            words: {comment.body.length} / 100
+          </Text>
         </FormControl>
       </Stack>
 

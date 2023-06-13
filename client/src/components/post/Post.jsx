@@ -16,6 +16,7 @@ import {
   ModalHeader,
 } from "@chakra-ui/react";
 import { ListComments } from "./ListItem";
+import { toast } from "react-toastify";
 
 import { ArrowBackIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/react";
@@ -40,14 +41,13 @@ const Post = () => {
     queryFn: () => getCommentsByPostId(id),
     networkMode: "offlineFirst",
   });
-
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: deleteComment,
     networkMode: "offlineFirst",
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["comments", id] });
-      alert(data.message);
+      toast.success(data.message);
     },
   });
 
