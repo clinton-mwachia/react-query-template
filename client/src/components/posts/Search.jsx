@@ -13,13 +13,13 @@ const Search = ({ searchText, setSearchText, suggestions }) => {
           setSearchText(e.target.value);
         }}
       />
-      <List bg={"green.200"}>
-        {searchText.length > 0
-          ? suggestions.map((item, index) => (
-              <ListItem key={index}>{item.title}</ListItem>
-            ))
-          : null}
-      </List>
+        <List bg={"green.200"}>
+          {searchText.length > 0
+            ? suggestions.map((item, index) => (
+                <ListItem key={index}>{item.title}</ListItem>
+              ))
+            : null}
+        </List>
     </>
   );
 };
