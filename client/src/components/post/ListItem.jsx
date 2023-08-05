@@ -1,4 +1,5 @@
 import { Badge, Box, HStack, Text } from "@chakra-ui/react";
+import ReactMarkdown from "react-markdown";
 import PropTypes from "prop-types";
 
 export const ListComments = ({ comments }) => {
@@ -24,7 +25,9 @@ export const ListComments = ({ comments }) => {
         </HStack>
         <HStack spacing={"10px"}>
           <Text as="b">Body:</Text>
-          <Text noOfLines={2}>{body} </Text>
+          <Text noOfLines={2}>
+            <ReactMarkdown>{body}</ReactMarkdown>
+          </Text>
         </HStack>
       </Box>
 
