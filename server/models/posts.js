@@ -3,21 +3,24 @@
  */
 const mongoose = require("mongoose");
 
-const postSchema = mongoose.Schema({
-  userId: {
-    type: Number,
+const postSchema = mongoose.Schema(
+  {
+    userId: {
+      type: Number,
+    },
+    id: {
+      type: Number,
+      index: { unique: true, dropDups: true },
+    },
+    title: {
+      type: String,
+    },
+    body: {
+      type: String,
+    },
   },
-  id: {
-    type: Number,
-    index: { unique: true, dropDups: true },
-  },
-  title: {
-    type: String,
-  },
-  body: {
-    type: String,
-  },
-});
+  { timestamps: true }
+);
 
 Post = mongoose.model("posts", postSchema);
 

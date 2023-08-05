@@ -71,7 +71,9 @@ router.get("/:id", async (req, res) => {
  */
 router.get("/get/post", async (req, res) => {
   try {
-    const comment = await Comment.find({ postId: req.query.postId });
+    const comment = await Comment.find({ postId: req.query.postId }).sort({
+      createdAt: -1,
+    });
     if (!comment) {
       return res.status(404).json({ message: "No comment with that id" });
     } else {
