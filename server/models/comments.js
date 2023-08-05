@@ -3,24 +3,27 @@
  */
 const mongoose = require("mongoose");
 
-const commentSchema = mongoose.Schema({
-  postId: {
-    type: Number,
+const commentSchema = mongoose.Schema(
+  {
+    postId: {
+      type: Number,
+    },
+    id: {
+      type: Number,
+      index: { unique: true, dropDups: true },
+    },
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    body: {
+      type: String,
+    },
   },
-  id: {
-    type: Number,
-    index: { unique: true, dropDups: true },
-  },
-  name: {
-    type: String,
-  },
-  email: {
-    type: String,
-  },
-  body: {
-    type: String,
-  },
-});
+  { timestamps: true }
+);
 
 Comment = mongoose.model("comments", commentSchema);
 

@@ -47,6 +47,7 @@ router.get("/", async (req, res) => {
     const totalPages = Math.ceil(totalPosts / pageSize);
 
     const posts = await Post.find()
+      .sort({ createdAt: -1 })
       .skip((pageNumber - 1) * pageSize)
       .limit(pageSize);
 
