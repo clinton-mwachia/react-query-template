@@ -116,7 +116,7 @@ const Form = ({ setAdd, id }) => {
 
 Form.propTypes = {
   setAdd: PropTypes.func,
-  id: PropTypes.number,
+  id: PropTypes.string,
 };
 
 export default Form;
