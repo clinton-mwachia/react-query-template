@@ -6,9 +6,6 @@
   "scripts": {
     "dev": "nodemon index.js"
   },
-  "bin": {
-    "my-node-app": "./index.js"
-  },
   "author": "clinton moshe mwachia",
   "license": "ISC",
   "dependencies": {
