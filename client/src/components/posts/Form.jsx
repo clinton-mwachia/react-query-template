@@ -54,7 +54,7 @@ const Form = ({ setAdd }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack direction={{ base: "row", md: "column", sm: "column" }}>
+      <Stack direction={{ base: "column", md: "column", sm: "column" }}>
         <FormControl>
           <label htmlFor="id">id</label>
           <Input
@@ -99,6 +99,7 @@ const Form = ({ setAdd }) => {
       </Stack>
 
       <Button type="submit">Save</Button>
+      <Button onClick={() => setAdd(false)}>Cancel</Button>
     </form>
   );
 };
