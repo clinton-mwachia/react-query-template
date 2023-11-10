@@ -15,10 +15,10 @@ const router = express.Router();
  */
 router.post("/register", async (req, res) => {
   try {
-    let comment_exists = await Comment.findOne({ id: req.body.id });
+    /* let comment_exists = await Comment.findOne({ id: req.body.id });
     if (comment_exists) {
       return res.status(400).json({ message: "Comment Id exists" });
-    }
+    }*/
     let obj = new Comment(req.body);
     const comment = await obj.save();
 

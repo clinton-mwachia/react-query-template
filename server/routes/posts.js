@@ -15,11 +15,11 @@ const router = express.Router();
  */
 router.post("/register", async (req, res) => {
   try {
-    let post_exists = await Post.findOne({ id: req.body.id });
+    /*let post_exists = await Post.findOne({ id: req.body.id });
 
     if (post_exists) {
       return res.status(400).json({ message: "Post Id exists" });
-    }
+    }*/
     let obj = new Post(req.body);
     const post = await obj.save();
 
