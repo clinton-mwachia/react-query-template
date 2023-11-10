@@ -10,7 +10,6 @@ const postSchema = mongoose.Schema(
     },
     id: {
       type: Number,
-      index: { unique: true, dropDups: true },
     },
     title: {
       type: String,

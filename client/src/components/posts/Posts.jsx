@@ -71,7 +71,7 @@ const Posts = () => {
     posts.data.filter((item) =>
       item.title?.toLowerCase().includes(searchText.toLowerCase())
     );
-
+  console.log(filteredPosts);
   const suggestionsData =
     posts &&
     posts.data.filter((item) =>
