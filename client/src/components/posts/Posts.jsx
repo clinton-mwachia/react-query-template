@@ -9,10 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { getPosts } from "./Helpers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Card from "./Card";
-import Search from "./Search";
-import { useState, useEffect } from "react";
-import Form from "./Form";
+import { useState, useEffect, Suspense, lazy } from "react";
+
+const Form = lazy(() => import("./Form"));
+const Card = lazy(() => import("./Card"));
+const Search = lazy(() => import("./Search"));
 
 const Posts = () => {
   const [searchText, setSearchText] = useState("");
@@ -71,7 +72,7 @@ const Posts = () => {
     posts.data.filter((item) =>
       item.title?.toLowerCase().includes(searchText.toLowerCase())
     );
-  console.log(filteredPosts);
+
   const suggestionsData =
     posts &&
     posts.data.filter((item) =>
@@ -97,11 +98,13 @@ const Posts = () => {
         </Heading>
 
         <Box bg={"gray.200"} p={2}>
-          <Search
-            searchText={searchText}
-            setSearchText={setSearchText}
-            suggestions={suggestionsData}
-          />
+          <Suspense fallback={<p>loading search</p>}>
+            <Search
+              searchText={searchText}
+              setSearchText={setSearchText}
+              suggestions={suggestionsData}
+            />
+          </Suspense>
         </Box>
         <Box>
           <Button onClick={() => setAdd(!add)}>Add Post</Button>
@@ -111,7 +114,9 @@ const Posts = () => {
       <Container maxW={"4xl"} mb={7} p={5}>
         {add ? (
           <Box>
-            <Form setAdd={setAdd} />
+            <Suspense fallback={<p>loading form</p>}>
+              <Form setAdd={setAdd} />
+            </Suspense>
           </Box>
         ) : (
           <>
@@ -125,7 +130,9 @@ const Posts = () => {
               >
                 {filteredPosts.map((post, index) => (
                   <div key={index}>
-                    <Card title={post.title} href={`posts/${post.id}`} />
+                    <Suspense fallback={<p>loading card</p>}>
+                      <Card title={post.title} href={`posts/${post.id}`} />
+                    </Suspense>
                   </div>
                 ))}
               </SimpleGrid>
