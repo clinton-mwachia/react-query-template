@@ -55,6 +55,7 @@ app.use(`${API}/comments`, commentRoutes);
 
 /** real time */
 io.on("connection", (socket) => {
+  console.log("User Connected!!!");
   io.emit("test", "Hello from test");
   socket.on("disconnect", () => {
     console.log("someone has disconnected");
