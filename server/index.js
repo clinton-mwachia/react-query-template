@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
 const moment = require("moment-timezone");
+const { Server } = require("socket.io");
+const { createServer } = require("http");
 require("dotenv").config();
 
 /**
@@ -16,6 +18,12 @@ const API = process.env.API;
  * initialise app
  */
 const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:5173",
+  },
+});
 
 /**
  * import routes
@@ -44,6 +52,15 @@ app.use(
  */
 app.use(`${API}/posts`, postRoutes);
 app.use(`${API}/comments`, commentRoutes);
+
+/** real time */
+io.on("connection", (socket) => {
+  io.emit("test", "Hello from test");
+  socket.on("disconnect", () => {
+    console.log("someone has disconnected");
+  });
+});
+
 /**
  * connect to the db
  */
@@ -55,7 +72,7 @@ mongoose
   .then((res) => console.info("DB CONNECTED"))
   .catch((err) => console.error(err));
 
-app.listen(PORT, (err) => {
+httpServer.listen(PORT, (err) => {
   if (err) {
     console.error(err);
   }
