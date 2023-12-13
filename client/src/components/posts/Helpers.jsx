@@ -9,3 +9,8 @@ export const newPost = async ({ formData }) => {
   const { data } = await Axios.post(`/posts/register`, formData);
   return data;
 };
+
+export const getPostById = async ({ id }) => {
+  const { data } = await Axios.get(`/posts/${id}`);
+  return data;
+};
