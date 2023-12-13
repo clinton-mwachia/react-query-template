@@ -1,9 +1,17 @@
 import { useState } from "react";
-import { FormControl, Stack, Input, Textarea, Button } from "@chakra-ui/react";
+import {
+  FormControl,
+  Stack,
+  Input,
+  Textarea,
+  Button,
+  Tag,
+} from "@chakra-ui/react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
-import { newPost } from "./Helpers";
+import { getPostById, newPost } from "./Helpers";
 
 const Form = ({ setAdd }) => {
   let POST = {
@@ -27,22 +35,41 @@ const Form = ({ setAdd }) => {
     },
   });
 
+  const {
+    isError,
+    data: postById,
+    error,
+  } = useQuery(
+    {
+      queryKey: ["post", post.id],
+      queryFn: () => getPostById({ id: post.id }),
+      enabled: !!post.id, // The query will not execute until the post id exists
+    },
+    {
+      networkMode: "offlineFirst",
+    }
+  );
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
   const onInputChange = (e, name) => {
     const val = (e.target && e.target.value) || "";
-    let _user = { ...post };
+    let _post = { ...post };
 
-    _user[`${name}`] = val;
+    _post[`${name}`] = val;
 
-    setPost(_user);
+    setPost(_post);
   };
 
   const onInputNumChange = (e, name) => {
     const val = e.target.value || 0;
-    let _user = { ...post };
+    let _post = { ...post };
 
-    _user[`${name}`] = val;
+    _post[`${name}`] = val;
 
-    setPost(_user);
+    setPost(_post);
   };
 
   const handleSubmit = (e) => {
@@ -64,6 +91,15 @@ const Form = ({ setAdd }) => {
             onChange={(e) => onInputNumChange(e, "id")}
             value={post.id}
           />
+          {postById && postById.length === 0 ? (
+            <Tag colorScheme="green" variant={"solid"} mt={2}>
+              id is available
+            </Tag>
+          ) : (
+            <Tag colorScheme="red" variant={"solid"} mt={2}>
+              id is taken
+            </Tag>
+          )}
         </FormControl>
 
         <FormControl>
