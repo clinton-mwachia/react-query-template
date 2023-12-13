@@ -4,6 +4,8 @@
 
 # react-query-template
 
+Learn React query with this project
+
 [![React Version](https://img.shields.io/badge/react-18.2.0-blue.svg)](https://react.dev/)
 [![Express Version](https://img.shields.io/badge/Express-4.18.2-green.svg)](https://expressjs.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
