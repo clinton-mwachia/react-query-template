@@ -41,6 +41,7 @@ const Post = () => {
     queryFn: () => getCommentsByPostId(id),
     networkMode: "offlineFirst",
   });
+
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: deleteComment,

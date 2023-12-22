@@ -2,15 +2,16 @@ import { useState } from "react";
 import {
   FormControl,
   Stack,
+  Tag,
   Input,
   Textarea,
   Button,
   Text,
 } from "@chakra-ui/react";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
-import { addComment } from "./Helpers";
+import { addComment, getCommentById } from "./Helpers";
 
 const Form = ({ setAdd, id }) => {
   let COMMENT = {
@@ -27,13 +28,32 @@ const Form = ({ setAdd, id }) => {
     mutationFn: addComment,
     networkMode: "offlineFirst",
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["comments", id] });
+      queryClient.invalidateQueries({ queryKey: ["comments", comment.postId] });
       toast.success(data.message);
     },
     onError: (data) => {
       toast.error(data.response.data.message);
     },
   });
+
+  const {
+    isError,
+    data: commentById,
+    error,
+  } = useQuery(
+    {
+      queryKey: ["post", comment.id],
+      queryFn: () => getCommentById({ id: comment.id }),
+      enabled: !!comment.id, // The query will not execute until the comment id exists
+    },
+    {
+      networkMode: "offlineFirst",
+    }
+  );
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   const onInputChange = (e, name) => {
     const val = (e.target && e.target.value) || "";
@@ -72,6 +92,15 @@ const Form = ({ setAdd, id }) => {
             onChange={(e) => onInputNumChange(e, "id")}
             value={comment.id}
           />
+          {commentById && commentById.length === 0 ? (
+            <Tag colorScheme="green" variant={"solid"} mt={2}>
+              id is available
+            </Tag>
+          ) : (
+            <Tag colorScheme="red" variant={"solid"} mt={2}>
+              id is taken
+            </Tag>
+          )}
         </FormControl>
 
         <FormControl>

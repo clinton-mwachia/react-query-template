@@ -20,6 +20,11 @@ export const addComment = async ({ formData }) => {
   return data;
 };
 
+export const getCommentById = async ({ id }) => {
+  const { data } = await Axios.get(`/comments/${id}`);
+  return data;
+};
+
 export const deleteComment = async (id) => {
   const { data } = await Axios.delete(`/comments/${id}`);
   return data;
